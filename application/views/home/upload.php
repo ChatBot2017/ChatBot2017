@@ -53,8 +53,8 @@
 		</div>
 		<div class="confirm">
 			<ul>
-				<li><a href="#">取消</a></li>
-				<li><a href="#">確認</a></li>
+				<li><input type="reset" value="取消"></li>
+				<li><input type="submit" value="確認"></li>
 			</ul>
 		</div>
 	</form>

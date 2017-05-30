@@ -21,6 +21,7 @@
 
         <?php echo $article_item['article_name'] ?>
         <?php echo $news_item['article_content'] ?>
+    <?php endforeach; ?>
 </div>
 
 
@@ -29,14 +30,14 @@
 <!--page-->
 <div class="page">
 	<ul>
-		<li><</li>
-		<li>1</li>
-		<li>2</li>
-		<li>3</li>
-		<li>4</li>
-		<li>5</li>
-		<li>6</li>
-		<li>7</li>
-		<li>></li>
+		<li><a href="/"><</a></li>
+		<li><a href="/">1</a></li>
+		<li><a href="">2</a></li>
+		<li><a href="">3</a></li>
+		<li><a href="">4</a></li>
+		<li><a href="">5</a></li>
+		<li><a href="">6</a></li>
+		<li><a href="">7</a></li>
+		<li><a href="">></a></li>
 	</ul>
 </div>
