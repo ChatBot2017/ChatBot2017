@@ -60,3 +60,4 @@ $route['articles/(:num)'] = 'articles/show/$1';
 $route['articles/(:num)/edit'] = 'articles/edit/$1';
 $route['articles/(:num)/update'] = 'articles/update/$1';
 $route['articles/(:num)/destroy'] = 'articles/destroy/$1';
+$route['articles/(:num)/comment'] = 'articles/comment/$1';

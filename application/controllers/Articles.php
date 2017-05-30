@@ -5,6 +5,9 @@ class Articles extends CI_Controller
     {
         parent::__construct();
         $this->load->model('article_model');
+        $this->load->model('comment_model');
+        $this->load->helper('form');
+        $this->load->library('form_validation');
     }
     public function index()
     {
@@ -14,14 +17,14 @@ class Articles extends CI_Controller
     public function show($id = null)
     {
         $data['article'] = $this->article_model->get($id);
+        $data['comments'] = $this->comment_model->find_by_article($id);
         $this->load->view('articles/show', $data);
     }
 
     public function create()
     {
         $this->checkSession();
-        $this->load->helper('form');
-        $this->load->library('form_validation');
+
         $this->load->view('templates/message');
         $this->load->view('articles/create');
     }
@@ -29,10 +32,6 @@ class Articles extends CI_Controller
     public function creating()
     {
         $this->checkSession();
-
-        $this->load->helper('form');
-        $this->load->library('form_validation');
-
         $this->form_validation->set_rules('title', 'Title', 'required');
         $this->form_validation->set_rules('content', 'Content', 'required');
 
@@ -42,9 +41,12 @@ class Articles extends CI_Controller
             $this->load->view('articles/create');
             return true;
         } else {
-            $title = $this->input->post('title');
-            $content = $this->input->post('content');
-            $article_id = $this->article_model->insert($title, $content, $_SESSION['user']['id']);
+            $data = array(
+              "title" => $this->input->post('title'),
+              "content" => $this->input->post('content'),
+              "pic_url" => $this->input->post('pic_url')
+            );
+            $article_id = $this->article_model->insert($data, $_SESSION['user']['id']);
             $this->session->set_flashdata('message', "建立文章成功");
             redirect(site_url('articles/'.$article_id), 'refresh');
             return true;
@@ -56,8 +58,6 @@ class Articles extends CI_Controller
         $this->checkSession();
         $data['article'] = $this->article_model->get($id);
         $this->checkArticleAuthor($data['article'], $_SESSION["user"]);
-        $this->load->helper('form');
-        $this->load->library('form_validation');
         $this->load->view('templates/message');
         $this->load->view('articles/edit', $data);
     }
@@ -67,8 +67,6 @@ class Articles extends CI_Controller
         $this->checkSession();
         $data['article'] = $this->article_model->get($id);
         $this->checkArticleAuthor($data['article'], $_SESSION["user"]);
-        $this->load->helper('form');
-        $this->load->library('form_validation');
         $this->form_validation->set_rules('title', 'Title', 'required');
         $this->form_validation->set_rules('content', 'Content', 'required');
 
@@ -77,13 +75,12 @@ class Articles extends CI_Controller
             redirect(site_url('articles/'.$id.'/edit'), 'refresh');
             return true;
         } else {
-            $title = $this->input->post('title');
-            $content = $this->input->post('content');
-            $value = array(
-                'title' => $title,
-                'content' => $content
+            $data = array(
+              "title" => $this->input->post('title'),
+              "content" => $this->input->post('content'),
+              "pic_url" => $this->input->post('pic_url')
             );
-            $query = $this->article_model->update($value, $id);
+            $query = $this->article_model->update($data, $id);
             $this->session->set_flashdata('message', "更新文章成功");
             redirect(site_url('articles/'.$id), 'refresh');
             return true;
@@ -102,6 +99,25 @@ class Articles extends CI_Controller
         } else {
             $this->session->set_flashdata('message', "刪除文章失敗");
             redirect(site_url('articles/'.$id), 'refresh');
+            return true;
+        }
+    }
+
+    public function comment($article_id=null)
+    {
+        $this->form_validation->set_rules('message', 'Message', 'required');
+        if ($this->form_validation->run() == false) {
+            $this->session->set_flashdata('message', "留言失敗。");
+            redirect(site_url('articles/'.$article_id), 'refresh');
+            return true;
+        } else {
+            $data = array(
+              "message" => $this->input->post('message'),
+              "article_id" => $article_id
+            );
+            $query = $this->comment_model->create($data);
+            $this->session->set_flashdata('message', "留言成功");
+            redirect(site_url('articles/'.$article_id), 'refresh');
             return true;
         }
     }

@@ -5,14 +5,10 @@ class Article_model extends CI_Model
     {
         parent::__construct();
     }
-    public function insert($title=null, $content=null, $author=null)
+    public function insert($value, $author_id=null)
     {
-        $query = $this->db->insert("articles",
-            array(
-            "user_id" =>  $author,
-            "title" => $title,
-            "content" => $content
-        ));
+        $value['user_id'] = $author_id;
+        $query = $this->db->insert("articles", $value);
         if ($query) {
             return $this->db->insert_id();
         } else {
