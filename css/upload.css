@@ -48,12 +48,12 @@
 	margin-right: 50px;
 }
 
-.confirm a{
+.confirm ul li input{
 	text-decoration: none;
 	background-color: #ccc;
 	color: #fff;
 	border-radius: 4px;
-	padding: 15px 40px 15px 40px;
+	padding: 15px 40px 40px 40px;
 	font-size: 20px;
 	line-height: 1.33;
 }

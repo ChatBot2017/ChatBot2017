@@ -269,8 +269,7 @@ a h1{
 .page ul li{
 	width: 50px;
 	height: 50px;
-	background-color: #dfdfe1;
-	/*background-color: #88FAD7;*/
+
 	text-align: center;
 
 	display: -webkit-flex;
@@ -280,6 +279,32 @@ a h1{
   	-webkit-justify-content: center;
     justify-content: center;
 }
+
+
+.page ul li a{
+  color: black;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+   border: 1px solid #ddd;
+}
+
+.page ul li:first-child a{
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.page ul li:last-child a{
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.page ul li a.active{
+  background-color: #4CAF50;
+  color: white;
+}
+
+.page ul li a:hover:not(.active) {background-color: #ddd;}
 
 .footer{
 	margin-top: 140px;
