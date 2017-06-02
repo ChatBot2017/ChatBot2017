@@ -36,4 +36,14 @@ class User_model extends CI_Model
             return null;
         }
     }
+
+    public function create($value)
+    {
+        $query = $this->db->insert("users", $value);
+        if ($query) {
+            return $this->db->insert_id();
+        } else {
+            return false;
+        }
+    }
 }

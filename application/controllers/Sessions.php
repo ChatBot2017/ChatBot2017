@@ -17,6 +17,7 @@ class Sessions extends CI_Controller
         $this->load->helper('form');
         $this->load->view('templates/message');
         $this->load->view('sessions/create');
+        $this->load->view('templates/footer');
     }
 
     public function creating()
@@ -27,10 +28,7 @@ class Sessions extends CI_Controller
 
         if ($data['user']) {
             $this->session->set_flashdata('message', "登入成功。");
-
             $_SESSION['user']['id'] =  $data['user']->id;
-            $_SESSION['user']['email'] =  $data['user']->email;
-
             redirect('/', 'refresh');
             return true;
         } else {

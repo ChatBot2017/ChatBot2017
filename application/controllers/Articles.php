@@ -7,6 +7,7 @@ class Articles extends CI_Controller
         $this->load->model('article_model');
         $this->load->model('comment_model');
         $this->load->model('user_model');
+        $this->load->model('like_model');
         $this->load->helper('form');
         $this->load->library('form_validation');
     }
@@ -27,6 +28,12 @@ class Articles extends CI_Controller
         }
         $data['comments'] = $this->comment_model->find_by_article($id);
         $data['author'] = $this->user_model->find($data['article']['user_id']);
+        $data['likes'] = $this->like_model->article_likes($id);
+        $user_id = null;
+        if (isset($_SESSION["user"]['id'])) {
+            $user_id = $_SESSION["user"]['id'];
+        }
+        $data['liked'] = $this->like_model->is_exists($user_id, $id);
         if (!empty($data['comments'])) {
             $user_ids = array();
             foreach ($data['comments'] as $comment) {
@@ -143,6 +150,44 @@ class Articles extends CI_Controller
             $this->session->set_flashdata('message', "留言成功");
             redirect(site_url('articles/'.$article_id), 'refresh');
             return true;
+        }
+    }
+
+    public function like($article_id)
+    {
+        $this->checkSession();
+        $this->checkLike($_SESSION["user"]['id'], $article_id);
+        $this->like_model->insert($_SESSION["user"]['id'], $article_id);
+        $this->session->set_flashdata('message', "你點讚了此文章");
+        redirect(site_url('articles/'.$article_id), 'refresh');
+    }
+
+    public function dislike($article_id)
+    {
+        $this->checkSession();
+        $this->checkLiked($_SESSION["user"]['id'], $article_id);
+        $this->like_model->destroy($_SESSION["user"]['id'], $article_id);
+        $this->session->set_flashdata('message', "你收回了此文章的讚。");
+        redirect(site_url('articles/'.$article_id), 'refresh');
+    }
+
+    private function checkLike($user_id, $article_id)
+    {
+        $like = $this->like_model->is_exists($user_id, $article_id);
+        if ($like) {
+            $this->session->set_flashdata('message', "你已經讚過了。");
+            redirect(site_url('articles/'.$article_id), 'refresh');
+            return false;
+        }
+    }
+
+    private function checkLiked($user_id, $article_id)
+    {
+        $like = $this->like_model->is_exists($user_id, $article_id);
+        if (!$like) {
+            $this->session->set_flashdata('message', "你還沒讚過，不能收回讚。");
+            redirect(site_url('articles/'.$article_id), 'refresh');
+            return false;
         }
     }
     private function checkSession()

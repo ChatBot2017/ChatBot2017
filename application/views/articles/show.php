@@ -46,7 +46,21 @@
 	</div>
   <!--Like or Dislike-->
   <div class="comment-button">
-    <div class="like-buttom"><a href=""><img src="<?php echo base_url('public/images/like.png'); ?>" alt="like"></a></div>
+    <div class="like-buttom">
+			<?php if ($liked): ?>
+				<a href="<?php echo site_url('articles/'.$article['id'].'/dislike'); ?>">
+					收回讚
+				</a>
+				<img src="<?php echo base_url('public/images/like.png'); ?>" alt="like">
+			<?php else: ?>
+				<a href="<?php echo site_url('articles/'.$article['id'].'/like'); ?>">
+					<img src="<?php echo base_url('public/images/like.png'); ?>" alt="like">
+				</a>
+			<?php endif; ?>
+
+			<!-- likes number -->
+			<?php echo count($likes); ?>
+		</div>
   </div>
 
 	<!--related-article-->
