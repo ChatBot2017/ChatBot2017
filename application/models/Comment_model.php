@@ -10,6 +10,9 @@ class Comment_model extends CI_Model
     {
         $this->db->where('article_id', $article_id);
         $query = $this->db->get('comments');
+        if ($query->num_rows() <= 0) {
+            return null;
+        }
         return $query->result_array();
     }
     public function create($value)
