@@ -15,7 +15,6 @@ class Sessions extends CI_Controller
             return true;
         }
         $this->load->helper('form');
-        $this->load->view('templates/message');
         $this->load->view('sessions/create');
         $this->load->view('templates/footer');
     }
