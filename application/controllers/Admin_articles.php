@@ -43,22 +43,22 @@ class Admin_articles extends CI_Controller
 
     public function active($article_id)
     {
-      $data = array(
+        $data = array(
         "status" => "active"
       );
-      $query = $this->article_model->update($data, $article_id);
-      $this->session->set_flashdata('message', "審核文章通過成功");
-      redirect(site_url('admin/articles/'), 'refresh');
+        $query = $this->article_model->update($data, $article_id);
+        $this->session->set_flashdata('message', "審核文章通過成功");
+        redirect(site_url('admin/articles/'), 'refresh');
     }
 
     public function refuse($article_id)
     {
-      $data = array(
+        $data = array(
         "status" => "refuse"
       );
-      $query = $this->article_model->update($data, $article_id);
-      $this->session->set_flashdata('message', "審核文章拒絕成功");
-      redirect(site_url('admin/articles/'), 'refresh');
+        $query = $this->article_model->update($data, $article_id);
+        $this->session->set_flashdata('message', "審核文章拒絕成功");
+        redirect(site_url('admin/articles/'), 'refresh');
     }
 
     private function checkSession()
@@ -71,9 +71,9 @@ class Admin_articles extends CI_Controller
     }
     private function check_admin()
     {
-        if (isset($_SESSION["user"]['is_admin']) && ($_SESSION["user"]['is_admin']==true)) {
+        if (!(isset($_SESSION["user"]['is_admin']) && ($_SESSION["user"]['is_admin']==true))) {
             $this->session->set_flashdata('message', "你不是管理員，無權操作。");
-            redirect(site_url('']), 'refresh');
+            redirect(site_url(), 'refresh');
             return false;
         }
     }
