@@ -13,7 +13,7 @@ class Articles extends CI_Controller
     }
     public function index()
     {
-        $data['articles'] = $this->article_model->getALL();
+        $data['articles'] = $this->article_model->find_active();
         $this->load->view('templates/header');
         $this->load->view('articles/index', $data);
         $this->load->view('templates/footer');
@@ -130,6 +130,12 @@ class Articles extends CI_Controller
             redirect(site_url('articles/'.$id), 'refresh');
             return true;
         }
+    }
+    public function my()
+    {
+        $this->checkSession();
+        $data['articles'] = $this->article_model->find_by_author($_SESSION["user"]["id"]);
+        $this->load->view('articles/my', $data);
     }
 
     public function comment($article_id=null)
