@@ -28,6 +28,10 @@ class Sessions extends CI_Controller
         if ($data['user']) {
             $this->session->set_flashdata('message', "登入成功。");
             $_SESSION['user']['id'] =  $data['user']->id;
+            // if user is admin
+            if ($data['user']->is_admin) {
+              $_SESSION['user']['is_admin'] =  $data['user']->is_admin;
+            }
             redirect('/', 'refresh');
             return true;
         } else {

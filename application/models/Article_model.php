@@ -22,6 +22,13 @@ class Article_model extends CI_Model
         return $query->result_array();
     }
 
+    public function find_active()
+    {
+        $this->db->where('status', 'active');
+        $query = $this->db->get('articles');
+        return $query->result_array();
+    }
+
     public function get($id)
     {
         $this->db->where('id', $id);
@@ -44,5 +51,12 @@ class Article_model extends CI_Model
         $this->db->where('id', $id);
         $query = $this->db->delete('articles');
         return $query;
+    }
+
+    public function find_by_author($author_id)
+    {
+        $this->db->where('user_id', $author_id);
+        $query = $this->db->get('articles');
+        return $query->result_array();
     }
 }
