@@ -78,35 +78,28 @@
 
 
 <div class="manage_wrap">
-	<p>我的文章</p>
+	<p>管理會員資訊</p>
 	<table>
     <thead>
       <tr>
-        <th>標題</th>
-				<th>作者</th>
-        <th>瀏覽次數</th>
-        <th>建立時間</th>
-				<th>審核狀態</th>
-				<th colspan="2">#</th>
-        <th colspan="3">#</th>
-
+        <th>名稱</th>
+				<th>信箱</th>
+        <th>密碼</th>
+				<th>建立時間</th>
+				<th colspan="3">#</th>
       </tr>
     </thead>
     <tbody>
-      <?php foreach ($articles as $article): ?>
+      <?php foreach ($users as $user): ?>
         <tr>
-         	<td><?php echo $article['title'] ?></td>
-					<td><?php echo $article['user_id'] ?></td>
-          <td><?php echo $article['views'] ?></td>
-          <td><?php echo $article['created_at'] ?></td>
-					<td><?php echo $article['status'] ?></td>
-					<td>
-            <a href="<?php echo site_url('admin/articles/'.$article['id'].'/active') ?>">通過</a>
-            <a href="<?php echo site_url('admin/articles/'.$article['id'].'/refuse') ?>">拒絕</a>
-          </td>
+         	<td><?php echo $user['name'] ?></td>
+					<td><?php echo $user['email'] ?></td>
+          <td><?php echo $user['password'] ?></td>
+          <td><?php echo $user['created_at'] ?></td>
          	<td>
-            <a href="<?php echo site_url('articles/'.$article['id']) ?>">閱讀</a>
-            <a href="<?php echo site_url('admin/articles/'.$article['id'].'/destroy') ?>">刪除</a>
+            <a href="<?php echo site_url('admin/users/'.$user['id']) ?>">閱讀</a>
+						<a href="<?php echo site_url('admin/users/'.$user['id'].'/edit') ?>">修改</a>
+            <a href="<?php echo site_url('admin/users/'.$user['id'].'/destroy') ?>">刪除</a>
           </td>
        	</tr>
       <?php endforeach; ?>
