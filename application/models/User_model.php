@@ -13,6 +13,12 @@ class User_model extends CI_Model
         }
     }
 
+    public function all()
+    {
+        $query = $this->db->get('users');
+        return $query->result_array();
+    }
+
     public function find_by_ids($user_ids)
     {
         $user_ids = array_values(array_unique($user_ids));
@@ -45,5 +51,19 @@ class User_model extends CI_Model
         } else {
             return false;
         }
+    }
+
+    public function update($value, $id)
+    {
+        $this->db->where('id', $id);
+        $query = $this->db->update('users', $value);
+        return $query;
+    }
+
+    public function destroy($id)
+    {
+        $this->db->where('id', $id);
+        $query = $this->db->delete('users');
+        return $query;
     }
 }

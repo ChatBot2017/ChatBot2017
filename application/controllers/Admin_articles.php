@@ -14,13 +14,13 @@ class Admin_articles extends CI_Controller
         $this->checkSession();
         $this->check_admin();
         $data['articles'] = $this->article_model->getALL();
-        if (!empty($data['articles'])) {
-            $user_ids = array();
-            foreach ($data['articles'] as $article) {
-                if (!empty($article['user_id'])) {
-                    array_push($user_ids, $article['user_id']);
-                }
+        $user_ids = array();
+        foreach ($data['articles'] as $article) {
+            if (!empty($article['user_id'])) {
+                array_push($user_ids, $article['user_id']);
             }
+        }
+        if (!empty($user_ids)) {
             $data['users'] = $this->user_model->find_by_ids($user_ids);
         }
         $this->load->view('admin_articles/index', $data);

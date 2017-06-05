@@ -70,3 +70,7 @@ $route['admin/articles/(:num)/active'] = 'admin_articles/active/$1';
 $route['admin/articles/(:num)/refuse'] = 'admin_articles/refuse/$1';
 $route['admin/articles/(:num)/destroy'] = 'admin_articles/destroy/$1';
 $route['admin/users'] = 'admin_users/index';
+$route['admin/users/(:num)'] = 'admin_users/show/$1';
+$route['admin/users/(:num)/edit'] = 'admin_users/edit/$1';
+$route['admin/users/(:num)/update'] = 'admin_users/update/$1';
+$route['admin/users/(:num)/destroy'] = 'admin_users/destroy/$1';
