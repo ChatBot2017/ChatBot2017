@@ -1,10 +1,10 @@
 <?php
-class chatbots extends CI_Controller{
+class Chatbots extends CI_Controller{
  public function __construct()/*class類別:訂好的規格 */
     {
         parent::__construct();
         $this->load->model('article_model');
-        $this->load->model('chatbots_model');
+        $this->load->model('like_model');
     }
   public function index()
   {
@@ -14,18 +14,21 @@ class chatbots extends CI_Controller{
   
   }
    public function hot()
-  {
-        
+    {
+        $hots = [];
+
+        $likes = $this->like_model->hot_likes();
+        foreach ($likes as $like) {
+            $hots[] = $this->article_model->get($like['article_id']);
+        }
+
         $data = [
-    'hot' => $this->chatbots_model->getHot(), // 範例用model取DB資料 他們裡面都還是陣列
-    'all' => $this->article_model->getAll(), // 這也是 model 取出的 raw data
-    'page' => 1, // 我也可以指定是一個參數
-];
+            'hots' => $hots,
+        ];
         $this->load->view('templates/header');/*logo*/
         $this->load->view('chatbots/hot',$data);
-        $this->load->view('templates/footer');  
-
-  }
+        $this->load->view('templates/footer');
+    }
   public function tag()
   {
         $data['tag'] =$this->chatbots_model->getTag(); // 範例用model取DB資料 他們裡面都還是陣列];
