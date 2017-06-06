@@ -136,6 +136,7 @@ class Articles extends CI_Controller
         $this->checkSession();
         $data['articles'] = $this->article_model->find_by_author($_SESSION["user"]["id"]);
         $this->load->view('articles/my', $data);
+        $this->load->view('templates/footer');
     }
 
     public function comment($article_id=null)
@@ -212,4 +213,23 @@ class Articles extends CI_Controller
             return false;
         }
     }
+
+    // public function pagination(){
+    //     $this->load->library('pagination');
+
+    //     $config['base_url'] =  base_url().'/Articles/page/';;
+    //     $config['total_rows'] = 200;
+    //     $config['per_page'] = 1; 
+    //     $config['num_links'] = 5;
+    //     $config['use_page_numbers'] = TRUE;
+    //     $config['first_link'] = false;
+    //     $config['last_link'] = false;
+
+    //     $offset_limit = intval($this->uri->segment(3));
+    //     $this->pagination->initialize($config); 
+
+    //     //沒有分頁資料可以顯示的時候，create_links() 函數就會回傳空字串
+    //     echo $this->pagination->create_links();
+    //     // $this->load->view('Articles/index.php',$data);
+    // }
 }

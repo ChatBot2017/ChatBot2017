@@ -1,4 +1,4 @@
-<div class="wrap">
+<div class="user_edit_wrap">
   <?php echo validation_errors(); ?>
   <?php echo form_open('admin/users/'.$user['id'].'/update') ?>
   <div class="data">

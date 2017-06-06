@@ -23,7 +23,7 @@
 </div>
 
 <!--page-->
-<div class="page">
+<!-- <div class="page">
 	<ul>
 		<li><a href="/"><</a></li>
 		<li><a href="/">1</a></li>
@@ -35,4 +35,4 @@
 		<li><a href="">7</a></li>
 		<li><a href="">></a></li>
 	</ul>
-</div>
+</div> -->

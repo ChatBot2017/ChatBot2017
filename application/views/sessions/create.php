@@ -27,6 +27,35 @@
 			<h1>Chatbot文章上架</h1>
 		</a>
 
+		<!--navigation-->
+	    <div class="header-nav" id="nav">
+	      <ul>
+		    <li ><a href="#" id="close"><img src="<?php echo base_url('public/images/btnClose.png'); ?>" alt="Close"></a></li>
+		     <li class="header-nav-item"><a href="<?php echo site_url(); ?>">首頁</a></li>
+		    <li class="header-nav-item"><a href="/chatbots/">統計分析</a></li>
+		    <li class="header-nav-item"><a href="/article/">搜尋</a></li>
+	      </ul>
+	    </div>
+	    
+	     <div class="lang-nav" id="nav">
+	    	<ul>
+				<?php if ($this->session->userdata('user')): ?>
+						<?php if (isset($_SESSION['user']['is_admin']) && ($_SESSION['user']['is_admin']==true)): ?>
+	            			<li><a href="<?php echo site_url('admin/users'); ?>">會員管理</a></li>
+	    					<li><a href="<?php echo site_url('admin/articles'); ?>">文章管理</a></li>
+	          	<?php endif; ?>
+		    			<li><a href="<?php echo site_url('articles/my'); ?>">我的文章</a></li>
+						<li><a href="<?php echo site_url('articles/create'); ?>">上傳文章</a></li>
+						<li><a href="<?php echo site_url('sign_out') ?>">登出</a></li>
+				<?php else: ?>
+						<li><a href="<?php echo site_url('sign_in') ?>">登入</a></li>
+						<li><a href="<?php echo site_url('sign_up') ?>">註冊</a></li>
+				<?php endif; ?>
+	    	</ul>
+	    </div>
+	</div>	
+</div>
+
 <div class="wrap">
 	<?php echo form_open('sessions/creating') ?>
 		<div class="data">

@@ -28,7 +28,7 @@ class Users extends CI_Controller
         $this->form_validation->set_rules('password', 'Password', 'required');
 
         if ($this->form_validation->run() == false) {
-            $this->session->set_flashdata('message', "建立文章失敗");
+            $this->session->set_flashdata('message', "註冊失敗");
             $this->load->view('users/create');
             $this->load->view('templates/footer');
             return true;

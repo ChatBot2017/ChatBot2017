@@ -17,35 +17,33 @@ class Admin_users extends CI_Controller
         $this->load->view('admin_users/index', $data);
         $this->load->view('templates/footer');
     }
-
     public function show($user_id)
     {
         $this->checkSession();
         $this->check_admin();
         $data['user'] = $this->user_model->find($user_id);
+        $this->load->view('templates/header');
         $this->load->view('admin_users/show', $data);
         $this->load->view('templates/footer');
     }
-
     public function edit($user_id)
     {
         $this->checkSession();
         $this->check_admin();
         $data['user'] = $this->user_model->find($user_id);
+        $this->load->view('templates/header');
         $this->load->view('admin_users/edit', $data);
         $this->load->view('templates/footer');
     }
-
     public function update($user_id)
     {
         $this->checkSession();
         $this->check_admin();
-
         $this->form_validation->set_rules('email', 'Email', 'required');
         $this->form_validation->set_rules('password', 'Password', 'required');
-
         if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('message', "更新會員失敗");
+            $this->load->view('templates/header');
             $this->load->view('admin_users/edit');
             $this->load->view('templates/footer');
             return true;
@@ -58,7 +56,6 @@ class Admin_users extends CI_Controller
                 $data["password"] = $this->input->post('password');
             }
             $data["name"] = $this->input->post('name');
-
             $this->user_model->update($data, $user_id);
             $this->session->set_flashdata('message', "更新會員成功");
             redirect('admin_users', 'refresh');
@@ -70,7 +67,6 @@ class Admin_users extends CI_Controller
         $this->checkSession();
         $this->check_admin();
         $data['user'] = $this->user_model->find($user_id);
-
         $query = $this->user_model->destroy($user_id);
         if ($query) {
             $this->session->set_flashdata('message', "刪除會員成功");
@@ -79,8 +75,6 @@ class Admin_users extends CI_Controller
         }
         redirect(site_url('admin/users/'), 'refresh');
     }
-
-
     private function checkSession()
     {
         if (!isset($_SESSION["user"])) {
