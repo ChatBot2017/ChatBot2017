@@ -17,7 +17,7 @@ class Chatbots extends CI_Controller{
     {
         $hots = [];
 
-        $likes = $this->like_model->hot_likes();
+        $likes = $this->like_model->hot_likes();/*key*/
         foreach ($likes as $like) {
             $hots[] = $this->article_model->get($like['article_id']);
         }
@@ -31,9 +31,26 @@ class Chatbots extends CI_Controller{
     }
   public function tag()
   {
-        $data['tag'] =$this->chatbots_model->getTag(); // 範例用model取DB資料 他們裡面都還是陣列];
+        $tags = [];
+
+        $likes = $this->like_model->tag_likes();
+        foreach ($likes as $like) {
+            $tags[] = $this->article_model->gettag($like['tag_id']);
+        }
+
+        $data = [
+            'tags' => $tags,
+        ];
         $this->load->view('templates/header');/*logo*/
         $this->load->view('chatbots/tag',$data);
+        $this->load->view('templates/footer');  
+
+  }
+  public function article_tag()
+  {
+       
+        $this->load->view('templates/header');/*logo*/
+        $this->load->view('chatbots/article_tag');
         $this->load->view('templates/footer');  
 
   }
