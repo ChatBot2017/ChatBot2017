@@ -56,21 +56,26 @@
 	      </ul>
 	    </div>
 	    <!--function-->
-	    <div class="lang-nav" id="nav">
-	    	<ul>
-          <?php if ($this->session->userdata('user')): ?>
-            <?php if (isset($_SESSION['user']['is_admin']) && ($_SESSION['user']['is_admin']==true)): ?>
-              <li><a href="<?php echo site_url('admin/users'); ?>">會員管理</a></li>
-      				<li><a href="<?php echo site_url('admin/articles'); ?>">文章管理</a></li>
-            <?php endif; ?>
-            <li><a href="<?php echo site_url('articles/my'); ?>">我的文章</a></li>
-            <li><a href="<?php echo site_url('articles/create'); ?>">上傳文章</a></li>
-            <li><a href="<?php echo site_url('sign_out') ?>">登出</a></li>
-          <?php else: ?>
-            <li><a href="<?php echo site_url('sign_in') ?>">登入</a></li>
-            <li><a href="<?php echo site_url('sign_up') ?>">註冊</a></li>
-          <?php endif; ?>
-	    	</ul>
+	    <div class="lang-nav" id="nav">   
+			<?php if ($this->session->userdata('user')): ?>	    	
+				<?php if (isset($_SESSION['user']['is_admin']) && ($_SESSION['user']['is_admin']==true)): ?>
+					<ul id="manage">
+		            	<li><a href="<?php echo site_url('admin/users'); ?>">會員管理</a></li>
+		    			<li><a href="<?php echo site_url('admin/articles'); ?>">文章管理</a></li>	
+		    		</ul>
+	    		<?php endif; ?>
+		    			        	    	
+	    		<ul>
+		    	<li><a href="<?php echo site_url('articles/my'); ?>">我的文章</a></li>
+				<li><a href="<?php echo site_url('articles/create'); ?>">上傳文章</a></li>
+				<li><a href="<?php echo site_url('sign_out') ?>">登出</a></li>
+				</ul>
+			<?php else: ?>
+				<ul>
+				<li><a href="<?php echo site_url('sign_in') ?>">登入</a></li>
+				<li><a href="<?php echo site_url('sign_up') ?>">註冊</a></li>
+			<?php endif; ?>
+	    	</ul>	
 	    </div>
 	</div>
 </div>
@@ -86,7 +91,9 @@
 				<th>信箱</th>
         <th>密碼</th>
 				<th>建立時間</th>
-				<th colspan="3">#</th>
+				<th></th>
+				<th></th>
+				<th></th>
       </tr>
     </thead>
     <tbody>
@@ -96,11 +103,9 @@
 					<td><?php echo $user['email'] ?></td>
           <td><?php echo $user['password'] ?></td>
           <td><?php echo $user['created_at'] ?></td>
-         	<td>
-            <a href="<?php echo site_url('admin/users/'.$user['id']) ?>">閱讀</a>
-						<a href="<?php echo site_url('admin/users/'.$user['id'].'/edit') ?>">修改</a>
-            <a href="<?php echo site_url('admin/users/'.$user['id'].'/destroy') ?>">刪除</a>
-          </td>
+         	<td><a href="<?php echo site_url('admin/users/'.$user['id']) ?>">查看</a></td>
+			<td><a href="<?php echo site_url('admin/users/'.$user['id'].'/edit') ?>">編輯</a></td>
+            <td><a href="<?php echo site_url('admin/users/'.$user['id'].'/destroy') ?>">刪除</a></td>
        	</tr>
       <?php endforeach; ?>
     </tbody>

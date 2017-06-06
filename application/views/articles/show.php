@@ -33,12 +33,12 @@
 	<div class="article-page-content">
 		<a href="#"><img src="<?php echo $article['pic_url']; ?>" alt=""></a>
 		<div class="article-page-title"><?php echo $article['title']; ?></div>
-		<?php if (!empty($article['url'])): ?>
-			<a href="<?php echo $article['url']; ?>">連結原文</a>
-		<?php endif; ?>
 		<div class="article-page-intro">
 			<div><p><?php echo $article['created_at']; ?></p></div>
 			<div><p><?php echo $author['name']; ?></p></div>
+			<?php if (!empty($article['url'])): ?>
+			<a href="<?php echo $article['url']; ?>">ChatBot</a>
+		<?php endif; ?>
 		</div>
 		<div class="article-page-word">
 			<?php echo $article['content']; ?>
@@ -49,9 +49,9 @@
     <div class="like-buttom">
 			<?php if ($liked): ?>
 				<a href="<?php echo site_url('articles/'.$article['id'].'/dislike'); ?>">
-					收回讚
+					<img src="<?php echo base_url('public/images/like.png'); ?>" alt="like">
 				</a>
-				<img src="<?php echo base_url('public/images/like.png'); ?>" alt="like">
+				
 			<?php else: ?>
 				<a href="<?php echo site_url('articles/'.$article['id'].'/like'); ?>">
 					<img src="<?php echo base_url('public/images/like.png'); ?>" alt="like">
@@ -59,24 +59,19 @@
 			<?php endif; ?>
 
 			<!-- likes number -->
-			<?php echo count($likes); ?>
-		</div>
+			<p><?php echo count($likes); ?></p>
+	</div>
   </div>
 
 	<!--related-article-->
-	<div class="related-article-wrap">
+ <!-- 	<div class="related-article-wrap">
 		<div class="related-article">相關文章</div>
-		<!-- <div class="related-article-content">
-			<a href=""><img src="http://localhost:8888/chatbot/img/test.jpg" alt=""></a>
-			<div class="related-article-title"><a href="">瑞豐夜市-州記魚行＆劍旗魚酥塊</a></div>
-			<div class="related-article-intro">2016/06/14</div>
-		</div>
 		<div class="related-article-content">
 			<a href=""><img src="http://localhost:8888/chatbot/img/test.jpg" alt=""></a>
 			<div class="related-article-title"><a href="">瑞豐夜市-州記魚行＆劍旗魚酥塊</a></div>
 			<div class="related-article-intro">2016/06/14</div>
-		</div> -->
-	</div>
+		</div>
+	</div>  -->
 
 	<!--comment-->
 	<div class="comment-wrap">

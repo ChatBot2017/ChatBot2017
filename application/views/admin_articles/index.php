@@ -57,20 +57,24 @@
 	    </div>
 	    <!--function-->
 	    <div class="lang-nav" id="nav">
+		    
+			<?php if ($this->session->userdata('user')): ?>	    	
+				<?php if (isset($_SESSION['user']['is_admin']) && ($_SESSION['user']['is_admin']==true)): ?>
+					<ul id="manage">
+		            	<li><a href="<?php echo site_url('admin/users'); ?>">會員管理</a></li>
+		    			<li><a href="<?php echo site_url('admin/articles'); ?>">文章管理</a></li>
+		    		</ul>
+	    		<?php endif; ?>
+		    			        	    	
 	    	<ul>
-          <?php if ($this->session->userdata('user')): ?>
-            <?php if (isset($_SESSION['user']['is_admin']) && ($_SESSION['user']['is_admin']==true)): ?>
-              <li><a href="<?php echo site_url('admin/users'); ?>">會員管理</a></li>
-      				<li><a href="<?php echo site_url('admin/articles'); ?>">文章管理</a></li>
-            <?php endif; ?>
-            <li><a href="<?php echo site_url('articles/my'); ?>">我的文章</a></li>
-            <li><a href="<?php echo site_url('articles/create'); ?>">上傳文章</a></li>
-            <li><a href="<?php echo site_url('sign_out') ?>">登出</a></li>
-          <?php else: ?>
-            <li><a href="<?php echo site_url('sign_in') ?>">登入</a></li>
-            <li><a href="<?php echo site_url('sign_up') ?>">註冊</a></li>
-          <?php endif; ?>
-	    	</ul>
+		    	<li><a href="<?php echo site_url('articles/my'); ?>">我的文章</a></li>
+				<li><a href="<?php echo site_url('articles/create'); ?>">上傳文章</a></li>
+				<li><a href="<?php echo site_url('sign_out') ?>">登出</a></li>
+			<?php else: ?>
+				<li><a href="<?php echo site_url('sign_in') ?>">登入</a></li>
+				<li><a href="<?php echo site_url('sign_up') ?>">註冊</a></li>
+			<?php endif; ?>
+	    	</ul>	
 	    </div>
 	</div>
 </div>
@@ -78,17 +82,18 @@
 
 
 <div class="manage_wrap">
-	<p>我的文章</p>
-	<table>
+	<p>文章管理</p>
+	<table column="5">
     <thead>
       <tr>
         <th>標題</th>
-				<th>作者</th>
+		<th>作者</th>
         <th>瀏覽次數</th>
         <th>建立時間</th>
-				<th>審核狀態</th>
-				<th colspan="2">#</th>
-        <th colspan="3">#</th>
+		<th>審核狀態</th>
+		<th>審核</th>
+        <th></th>
+        <th></th>
 
       </tr>
     </thead>
@@ -104,10 +109,9 @@
             <a href="<?php echo site_url('admin/articles/'.$article['id'].'/active') ?>">通過</a>
             <a href="<?php echo site_url('admin/articles/'.$article['id'].'/refuse') ?>">拒絕</a>
           </td>
-         	<td>
-            <a href="<?php echo site_url('articles/'.$article['id']) ?>">閱讀</a>
-            <a href="<?php echo site_url('admin/articles/'.$article['id'].'/destroy') ?>">刪除</a>
-          </td>
+         	<td><a href="<?php echo site_url('articles/'.$article['id']) ?>">觀看</a></td>
+            <td><a href="<?php echo site_url('admin/articles/'.$article['id'].'/destroy') ?>">刪除</a></td>
+
        	</tr>
       <?php endforeach; ?>
     </tbody>

@@ -76,8 +76,8 @@ $query_builder = true;
 $db['default'] = array(
     'dsn'    => '',
     'hostname' => 'localhost',
-    'username' => 'root',
-    'password' => '123456',
+    'username' => 'project',
+    'password' => '12345678',
     'database' => 'chatbot',
     'dbdriver' => 'mysqli',
     'dbprefix' => '',
@@ -92,5 +92,7 @@ $db['default'] = array(
     'compress' => false,
     'stricton' => false,
     'failover' => array(),
-    'save_queries' => true
+    'save_queries' => true,
+    'port' =>8888
 );
+

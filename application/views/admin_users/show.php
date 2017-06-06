@@ -1,11 +1,35 @@
-<h1><?php echo $user['name'] ?></h1>
-<p>email: <?php echo $user['email'] ?></p>
-<p>password: <?php echo $user['password'] ?></p>
-<p>建立帳號時間: <?php echo $user['created_at'] ?></p>
-<p>上次登入時間: <?php echo $user['updated_at'] ?></p>
+
+<div class="user_info_wrap">
+
+<h1 class="user_name"><?php echo $user['name'] ?></h1>
+
 <?php if (empty($user['is_admin'])) {
     $admin = "否";
 } else {
       $admin = "是";
   } ?>
-<p>是否是管理員: <?php echo $admin ?></p>
+
+<table class="user_info">
+	<tr>
+		<td>信箱</td>
+		<td><?php echo $user['email'] ?></td>
+	</tr>
+	<tr>
+		<td>密碼</td>
+		<td><?php echo $user['password'] ?></td>
+	</tr>
+		<tr>
+		<td>建立帳號時間</td>
+		<td><?php echo $user['created_at'] ?></td>
+	</tr>
+		<tr>
+		<td>上次登入時間</td>
+		<td><?php echo $user['updated_at'] ?></td>
+	</tr>
+		<tr>
+		<td>管理員</td>
+		<td><?php echo $admin ?></td>
+	</tr>
+</table>
+
+</div>

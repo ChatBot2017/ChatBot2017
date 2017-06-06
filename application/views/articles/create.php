@@ -55,7 +55,7 @@
 			</div>
 			<div class="confirm">
 				<ul>
-					<li><a href="<?php echo site_url('articles'); ?>">取消</a></li>
+					<li><input type="button" value="取消" onclick="location.href='<?php echo site_url('articles'); ?>'"></li>
 					<li><input type="submit" name="submit" value="確認"></li>
 				</ul>
 			</div>

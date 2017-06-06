@@ -14,10 +14,10 @@ class User_model extends CI_Model
     }
 
     public function all()
-    {
-        $query = $this->db->get('users');
-        return $query->result_array();
-    }
+     {
+         $query = $this->db->get('users');
+         return $query->result_array();
+     }
 
     public function find_by_ids($user_ids)
     {
@@ -53,13 +53,12 @@ class User_model extends CI_Model
         }
     }
 
-    public function update($value, $id)
+public function update($value, $id)
     {
         $this->db->where('id', $id);
         $query = $this->db->update('users', $value);
         return $query;
     }
-
     public function destroy($id)
     {
         $this->db->where('id', $id);
