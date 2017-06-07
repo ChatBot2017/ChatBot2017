@@ -21,5 +21,18 @@ class Tag_model extends CI_Model
         }
     }
 
+     public function gettag($id)
+    {
+        $this->db->where('id', $id);
+        $query = $this->db->get('tags');
+        
+        if ($query->num_rows() <= 0) {
+            return null; //無資料時回傳 null
+        }
+        return $query->row_array();  //回傳第一筆
+    }
+
+    
+
 }
     

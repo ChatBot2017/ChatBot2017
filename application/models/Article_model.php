@@ -39,16 +39,7 @@ class Article_model extends CI_Model
         return $query->row_array();  //回傳第一筆
     }
 
-    public function gettag($id)
-    {
-        $this->db->where('id', $id);
-        $query = $this->db->get('tags');
-        
-        if ($query->num_rows() <= 0) {
-            return null; //無資料時回傳 null
-        }
-        return $query->row_array();  //回傳第一筆
-    }
+   
 
     public function update($value, $id)
     {

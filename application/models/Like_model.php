@@ -64,12 +64,5 @@ class Like_model extends CI_Model
         return $query->result_array();
     }
 
-    public function tag_likes($num = 10)/*取10個*/
-    {
-        $this->db->select('tag_id, count(*) as total')                                                    
-            ->group_by('tag_id')
-            ->order_by('total', 'DESC');
-        $query = $this->db->get('article_tags', $num);
-        return $query->result_array();
-    }
+   
 }
