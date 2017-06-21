@@ -20,12 +20,16 @@ class Chatbots extends CI_Controller{
         $hots = [];
 
         $likes = $this->like_model->hot_likes();/*key*/
-        foreach ($likes as $like) {
-            $hots[] = $this->article_model->get($like['article_id']);
+        foreach ($likes as &$like) {
+            //$hots[] = $this->article_model->get($like['article_id']);
+          $article = $this->article_model->get($like['article_id']);
+          
+          $like['title'] = $article['title'];
         }
 
         $data = [
-            'hots' => $hots,
+            //'hots' => $hots,
+          'likes' => $likes
         ];
         $this->load->view('templates/header');/*logo*/
         $this->load->view('chatbots/hot',$data);
@@ -48,6 +52,10 @@ class Chatbots extends CI_Controller{
         $this->load->view('templates/footer');  
 
   }
+
+     
+
+ 
   // public function article_tag()
   // {
   //        $article_tag = [];
