@@ -39,13 +39,17 @@ class Chatbots extends CI_Controller{
   {
         $tags = [];
 
-        $likes = $this->articletag_model->hot_tag();
-        foreach ($likes as $like) {
-            $tags[] = $this->tag_model->gettag($like['tag_id']);
+        $likes = $this->like_model->hot_tags();
+        foreach ($likes as &$like) {
+            //$tags[] = $this->tag_model->gettag($like['tag_id']);
+          $article_tag = $this->tag_model->gettag($like['tag_id']);
+
+          $like['name'] = $article_tag['name'];
         }
 
         $data = [
-            'tags' => $tags,
+            //'tags' => $tags,
+          'likes' => $likes
         ];
         $this->load->view('templates/header');/*logo*/
         $this->load->view('chatbots/tag',$data);

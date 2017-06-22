@@ -67,7 +67,7 @@ class Like_model extends CI_Model
    
    public function hot_tags($num = 10)/*取10個*/
     {
-        $this->db->select('tag_id, count(article_id) as total')
+        $this->db->select('tag_id, count(*) as total')
             ->group_by('tag_id')
             ->order_by('total', 'DESC');/*算出來之後由多到少排出來*/
         $query = $this->db->get('article_tags', $num);
