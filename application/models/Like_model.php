@@ -74,6 +74,15 @@ class Like_model extends CI_Model
         return $query->result_array();
     }
 
+    public function user_article($num = 10)/*取10個*/
+    {
+        $this->db->select('user_id, count(*) as total')
+            ->group_by('user_id')
+            ->order_by('total', 'DESC');/*算出來之後由多到少排出來*/
+        $query = $this->db->get('articles', $num);
+        return $query->result_array();
+    }
+
     public function get_member_analysis() {
         return $this->db->query("SELECT date_format(created_at, '%y-%M') as month, count(*) as total FROM `users` GROUP by date_format(created_at, '%y-%M')")
             ->result_array();
